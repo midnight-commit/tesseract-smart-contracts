@@ -25,7 +25,6 @@ abstract contract Cell is ICell, IERC20SendAndCallReceiver, INativeSendAndCallRe
     using SafeERC20 for IERC20;
     using Address for address payable;
 
-    uint256 constant GAS_LIMIT_BRIDGE_HOP = 350_000;
     IWrappedNativeToken wrappedNativeToken;
 
     bytes32 public immutable blockchainID;
@@ -259,8 +258,8 @@ abstract contract Cell is ICell, IERC20SendAndCallReceiver, INativeSendAndCallRe
             destinationTokenTransferrerAddress: hop.bridgePath.bridgeDestinationChain,
             recipientContract: hop.bridgePath.cellDestinationChain,
             recipientPayload: abi.encode(payload),
-            requiredGasLimit: hop.gasLimit + GAS_LIMIT_BRIDGE_HOP,
-            recipientGasLimit: hop.gasLimit,
+            requiredGasLimit: hop.requiredGasLimit,
+            recipientGasLimit: hop.recipientGasLimit,
             multiHopFallback: _isMultiHop(hop) ? payload.instructions.receiver : address(0),
             fallbackRecipient: payload.instructions.receiver,
             primaryFeeTokenAddress: token,
@@ -294,7 +293,7 @@ abstract contract Cell is ICell, IERC20SendAndCallReceiver, INativeSendAndCallRe
             primaryFeeTokenAddress: token,
             primaryFee: hop.bridgePath.teleporterFee,
             secondaryFee: hop.bridgePath.secondaryTeleporterFee,
-            requiredGasLimit: GAS_LIMIT_BRIDGE_HOP,
+            requiredGasLimit: hop.requiredGasLimit,
             multiHopFallback: _isMultiHop(hop) ? payload.instructions.receiver : address(0)
         });
         if (hop.bridgePath.sourceBridgeIsNative) {
@@ -349,7 +348,7 @@ abstract contract Cell is ICell, IERC20SendAndCallReceiver, INativeSendAndCallRe
             primaryFeeTokenAddress: token,
             primaryFee: payload.instructions.rollbackTeleporterFee,
             secondaryFee: 0,
-            requiredGasLimit: GAS_LIMIT_BRIDGE_HOP,
+            requiredGasLimit: payload.instructions.rollbackGasLimit,
             multiHopFallback: address(0)
         });
         if (rollbackNative) {

@@ -24,6 +24,7 @@ struct Instructions {
     address receiver;
     bool payableReceiver;
     uint256 rollbackTeleporterFee;
+    uint256 rollbackGasLimit;
     Hop[] hops;
 }
 
@@ -36,7 +37,8 @@ struct Instructions {
  */
 struct Hop {
     Action action;
-    uint256 gasLimit;
+    uint256 requiredGasLimit;
+    uint256 recipientGasLimit;
     bytes trade;
     BridgePath bridgePath;
 }

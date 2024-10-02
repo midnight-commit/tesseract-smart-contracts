@@ -20,7 +20,8 @@ contract YakSwapCellTest is BaseTest {
         Hop[] memory hops = new Hop[](1);
         hops[0] = Hop({
             action: Action.SwapAndTransfer,
-            gasLimit: 450_000 + gasEstimate,
+            requiredGasLimit: gasEstimate + 450_000,
+            recipientGasLimit: gasEstimate,
             trade: trade,
             bridgePath: BridgePath({
                 sourceBridgeIsNative: false,
@@ -33,8 +34,13 @@ contract YakSwapCellTest is BaseTest {
             })
         });
 
-        Instructions memory instructions =
-            Instructions({rollbackTeleporterFee: 0, receiver: vm.addr(123), payableReceiver: true, hops: hops});
+        Instructions memory instructions = Instructions({
+            rollbackTeleporterFee: 0,
+            rollbackGasLimit: 450_000,
+            receiver: vm.addr(123),
+            payableReceiver: true,
+            hops: hops
+        });
 
         CellPayload memory payload =
             CellPayload({instructions: instructions, sourceBlockchainID: "", rollbackDestination: address(0)});
@@ -57,7 +63,8 @@ contract YakSwapCellTest is BaseTest {
         Hop[] memory hops = new Hop[](1);
         hops[0] = Hop({
             action: Action.SwapAndTransfer,
-            gasLimit: 450_000 + gasEstimate + 500_000,
+            requiredGasLimit: gasEstimate + 450_000,
+            recipientGasLimit: gasEstimate,
             trade: trade,
             bridgePath: BridgePath({
                 sourceBridgeIsNative: false,
@@ -70,8 +77,13 @@ contract YakSwapCellTest is BaseTest {
             })
         });
 
-        Instructions memory instructions =
-            Instructions({rollbackTeleporterFee: 0, receiver: vm.addr(123), payableReceiver: true, hops: hops});
+        Instructions memory instructions = Instructions({
+            rollbackTeleporterFee: 0,
+            rollbackGasLimit: 450_000,
+            receiver: vm.addr(123),
+            payableReceiver: true,
+            hops: hops
+        });
 
         CellPayload memory payload =
             CellPayload({instructions: instructions, sourceBlockchainID: "", rollbackDestination: address(0)});
@@ -94,7 +106,8 @@ contract YakSwapCellTest is BaseTest {
         Hop[] memory hops = new Hop[](1);
         hops[0] = Hop({
             action: Action.SwapAndTransfer,
-            gasLimit: 450_000 + gasEstimate + 500_000,
+            requiredGasLimit: gasEstimate + 450_000,
+            recipientGasLimit: gasEstimate,
             trade: trade,
             bridgePath: BridgePath({
                 sourceBridgeIsNative: false,
@@ -107,8 +120,13 @@ contract YakSwapCellTest is BaseTest {
             })
         });
 
-        Instructions memory instructions =
-            Instructions({rollbackTeleporterFee: 0, receiver: vm.addr(123), payableReceiver: true, hops: hops});
+        Instructions memory instructions = Instructions({
+            rollbackTeleporterFee: 0,
+            rollbackGasLimit: 450_000,
+            receiver: vm.addr(123),
+            payableReceiver: true,
+            hops: hops
+        });
 
         CellPayload memory payload =
             CellPayload({instructions: instructions, sourceBlockchainID: "", rollbackDestination: address(0)});
@@ -124,7 +142,8 @@ contract YakSwapCellTest is BaseTest {
         Hop[] memory hops = new Hop[](1);
         hops[0] = Hop({
             action: Action.Hop,
-            gasLimit: 450_000,
+            requiredGasLimit: 900_000,
+            recipientGasLimit: 450_000,
             trade: "",
             bridgePath: BridgePath({
                 sourceBridgeIsNative: false,
@@ -137,8 +156,13 @@ contract YakSwapCellTest is BaseTest {
             })
         });
 
-        Instructions memory instructions =
-            Instructions({rollbackTeleporterFee: 0, receiver: vm.addr(123), payableReceiver: true, hops: hops});
+        Instructions memory instructions = Instructions({
+            rollbackTeleporterFee: 0,
+            rollbackGasLimit: 450_000,
+            receiver: vm.addr(123),
+            payableReceiver: true,
+            hops: hops
+        });
 
         CellPayload memory payload =
             CellPayload({instructions: instructions, sourceBlockchainID: "", rollbackDestination: address(0)});
@@ -154,7 +178,8 @@ contract YakSwapCellTest is BaseTest {
         Hop[] memory hops = new Hop[](1);
         hops[0] = Hop({
             action: Action.Hop,
-            gasLimit: 450_000,
+            requiredGasLimit: 900_000,
+            recipientGasLimit: 450_000,
             trade: "",
             bridgePath: BridgePath({
                 sourceBridgeIsNative: true,
@@ -167,8 +192,13 @@ contract YakSwapCellTest is BaseTest {
             })
         });
 
-        Instructions memory instructions =
-            Instructions({rollbackTeleporterFee: 0, receiver: vm.addr(123), payableReceiver: true, hops: hops});
+        Instructions memory instructions = Instructions({
+            rollbackTeleporterFee: 0,
+            rollbackGasLimit: 450_000,
+            receiver: vm.addr(123),
+            payableReceiver: true,
+            hops: hops
+        });
 
         CellPayload memory payload =
             CellPayload({instructions: instructions, sourceBlockchainID: "", rollbackDestination: address(0)});
@@ -184,7 +214,8 @@ contract YakSwapCellTest is BaseTest {
         Hop[] memory hops = new Hop[](1);
         hops[0] = Hop({
             action: Action.Hop,
-            gasLimit: 450_000,
+            requiredGasLimit: 900_000,
+            recipientGasLimit: 450_000,
             trade: "",
             bridgePath: BridgePath({
                 sourceBridgeIsNative: false,
@@ -197,8 +228,13 @@ contract YakSwapCellTest is BaseTest {
             })
         });
 
-        Instructions memory instructions =
-            Instructions({rollbackTeleporterFee: 0, receiver: vm.addr(123), payableReceiver: true, hops: hops});
+        Instructions memory instructions = Instructions({
+            rollbackTeleporterFee: 0,
+            rollbackGasLimit: 450_000,
+            receiver: vm.addr(123),
+            payableReceiver: true,
+            hops: hops
+        });
 
         CellPayload memory payload =
             CellPayload({instructions: instructions, sourceBlockchainID: "", rollbackDestination: address(0)});
@@ -214,7 +250,8 @@ contract YakSwapCellTest is BaseTest {
         Hop[] memory hops = new Hop[](1);
         hops[0] = Hop({
             action: Action.HopAndCall,
-            gasLimit: 450_000,
+            requiredGasLimit: 900_000,
+            recipientGasLimit: 450_000,
             trade: "",
             bridgePath: BridgePath({
                 sourceBridgeIsNative: false,
@@ -227,8 +264,13 @@ contract YakSwapCellTest is BaseTest {
             })
         });
 
-        Instructions memory instructions =
-            Instructions({rollbackTeleporterFee: 0, receiver: vm.addr(123), payableReceiver: true, hops: hops});
+        Instructions memory instructions = Instructions({
+            rollbackTeleporterFee: 0,
+            rollbackGasLimit: 450_000,
+            receiver: vm.addr(123),
+            payableReceiver: true,
+            hops: hops
+        });
 
         CellPayload memory payload =
             CellPayload({instructions: instructions, sourceBlockchainID: "", rollbackDestination: address(0)});
@@ -244,7 +286,8 @@ contract YakSwapCellTest is BaseTest {
         Hop[] memory hops = new Hop[](1);
         hops[0] = Hop({
             action: Action.HopAndCall,
-            gasLimit: 450_000,
+            requiredGasLimit: 900_000,
+            recipientGasLimit: 450_000,
             trade: "",
             bridgePath: BridgePath({
                 sourceBridgeIsNative: true,
@@ -257,8 +300,13 @@ contract YakSwapCellTest is BaseTest {
             })
         });
 
-        Instructions memory instructions =
-            Instructions({rollbackTeleporterFee: 0, receiver: vm.addr(123), payableReceiver: true, hops: hops});
+        Instructions memory instructions = Instructions({
+            rollbackTeleporterFee: 0,
+            rollbackGasLimit: 450_000,
+            receiver: vm.addr(123),
+            payableReceiver: true,
+            hops: hops
+        });
 
         CellPayload memory payload =
             CellPayload({instructions: instructions, sourceBlockchainID: "", rollbackDestination: address(0)});
@@ -274,7 +322,8 @@ contract YakSwapCellTest is BaseTest {
         Hop[] memory hops = new Hop[](1);
         hops[0] = Hop({
             action: Action.HopAndCall,
-            gasLimit: 450_000,
+            requiredGasLimit: 900_000,
+            recipientGasLimit: 450_000,
             trade: "",
             bridgePath: BridgePath({
                 sourceBridgeIsNative: false,
@@ -287,8 +336,13 @@ contract YakSwapCellTest is BaseTest {
             })
         });
 
-        Instructions memory instructions =
-            Instructions({rollbackTeleporterFee: 0, receiver: vm.addr(123), payableReceiver: true, hops: hops});
+        Instructions memory instructions = Instructions({
+            rollbackTeleporterFee: 0,
+            rollbackGasLimit: 450_000,
+            receiver: vm.addr(123),
+            payableReceiver: true,
+            hops: hops
+        });
 
         CellPayload memory payload =
             CellPayload({instructions: instructions, sourceBlockchainID: "", rollbackDestination: address(0)});
@@ -311,7 +365,8 @@ contract YakSwapCellTest is BaseTest {
         Hop[] memory hops = new Hop[](1);
         hops[0] = Hop({
             action: Action.SwapAndHop,
-            gasLimit: 450_000 + gasEstimate,
+            requiredGasLimit: gasEstimate + 450_000,
+            recipientGasLimit: gasEstimate,
             trade: trade,
             bridgePath: BridgePath({
                 sourceBridgeIsNative: false,
@@ -324,8 +379,13 @@ contract YakSwapCellTest is BaseTest {
             })
         });
 
-        Instructions memory instructions =
-            Instructions({rollbackTeleporterFee: 0, receiver: vm.addr(123), payableReceiver: true, hops: hops});
+        Instructions memory instructions = Instructions({
+            rollbackTeleporterFee: 0,
+            rollbackGasLimit: 450_000,
+            receiver: vm.addr(123),
+            payableReceiver: true,
+            hops: hops
+        });
 
         CellPayload memory payload =
             CellPayload({instructions: instructions, sourceBlockchainID: "", rollbackDestination: address(0)});
@@ -348,7 +408,8 @@ contract YakSwapCellTest is BaseTest {
         Hop[] memory hops = new Hop[](1);
         hops[0] = Hop({
             action: Action.SwapAndHop,
-            gasLimit: 450_000 + gasEstimate,
+            requiredGasLimit: gasEstimate + 450_000,
+            recipientGasLimit: gasEstimate,
             trade: trade,
             bridgePath: BridgePath({
                 sourceBridgeIsNative: true,
@@ -361,8 +422,13 @@ contract YakSwapCellTest is BaseTest {
             })
         });
 
-        Instructions memory instructions =
-            Instructions({rollbackTeleporterFee: 0, receiver: vm.addr(123), payableReceiver: true, hops: hops});
+        Instructions memory instructions = Instructions({
+            rollbackTeleporterFee: 0,
+            rollbackGasLimit: 450_000,
+            receiver: vm.addr(123),
+            payableReceiver: true,
+            hops: hops
+        });
 
         CellPayload memory payload =
             CellPayload({instructions: instructions, sourceBlockchainID: "", rollbackDestination: address(0)});
@@ -385,7 +451,8 @@ contract YakSwapCellTest is BaseTest {
         Hop[] memory hops = new Hop[](1);
         hops[0] = Hop({
             action: Action.SwapAndHop,
-            gasLimit: 450_000 + gasEstimate,
+            requiredGasLimit: gasEstimate + 450_000,
+            recipientGasLimit: gasEstimate,
             trade: trade,
             bridgePath: BridgePath({
                 sourceBridgeIsNative: false,
@@ -398,8 +465,13 @@ contract YakSwapCellTest is BaseTest {
             })
         });
 
-        Instructions memory instructions =
-            Instructions({rollbackTeleporterFee: 0, receiver: vm.addr(123), payableReceiver: true, hops: hops});
+        Instructions memory instructions = Instructions({
+            rollbackTeleporterFee: 0,
+            rollbackGasLimit: 450_000,
+            receiver: vm.addr(123),
+            payableReceiver: true,
+            hops: hops
+        });
 
         CellPayload memory payload =
             CellPayload({instructions: instructions, sourceBlockchainID: "", rollbackDestination: address(0)});
